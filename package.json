@@ -1,0 +1,15 @@
+{
+  "name": "tsdoc",
+  "version": "0.0.1",
+  "description": "A documentation generator for TypeScript code",
+  "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/my2b/TSDoc.git"
+  },
+  "author": "Vladislav Bodnya",
+  "bugs": {
+    "url": "https://github.com/my2b/TSDoc/issues"
+  },
+  "homepage": "https://github.com/my2b/TSDoc#readme"
+}
