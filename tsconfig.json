@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "removeComments": true,
+    "outDir": "src",
     "preserveConstEnums": true,
-    "sourceMap": true
+    "removeComments": true
   },
   "include": [
-    "src/**/*"
+    "lib/**/*"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "compileOnSave": true
 }

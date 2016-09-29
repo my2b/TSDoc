@@ -2,7 +2,7 @@
   "name": "tsdoc",
   "version": "0.0.1",
   "description": "A documentation generator for TypeScript code",
-  "main": "build/index.js",
+  "main": "src/tsdoc.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/my2b/TSDoc.git"
@@ -11,5 +11,11 @@
   "bugs": {
     "url": "https://github.com/my2b/TSDoc/issues"
   },
-  "homepage": "https://github.com/my2b/TSDoc#readme"
+  "homepage": "https://github.com/my2b/TSDoc#readme",
+  "dependencies": [
+    "typescript@^2.0",
+    "lodash@^4.14.36",
+    "@types/lodash@^4.14.36",
+    "@types/node@^6.0.41"
+  ]
 }
