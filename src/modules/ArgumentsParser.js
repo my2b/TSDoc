@@ -1,32 +1,28 @@
 "use strict";
-var _ = require("lodash");
-var ARGUMENTS_PREFIX = '--';
-exports.TSDOC_ARGUMENTS = {
-    out: '--out',
-    help: '--help',
-    version: '--version'
-};
-var ArgumentsParser = (function () {
-    function ArgumentsParser(argv) {
+const _ = require("lodash");
+const TSDOC_SINGLE_ARGS = ['help', 'version'];
+const TSDOC_CHAIN_ARGS = ['out',];
+const TSDOC_ALL_ARGS = _.concat(TSDOC_CHAIN_ARGS, TSDOC_SINGLE_ARGS);
+const ARGUMENTS_PREFIX = '--';
+class ArgumentsParser {
+    constructor(argv) {
         this.argv = argv;
     }
-    ArgumentsParser.prototype.parse = function () {
-        var currentArg;
-        return _(this.argv)
-            .transform(function (preparedArgs, argPart) {
-            var currentArgValue = '';
-            if (_.startsWith(argPart, ARGUMENTS_PREFIX)) {
-                if (!_.includes(_.values(exports.TSDOC_ARGUMENTS), argPart)) {
-                    throw "Unexpected argument " + argPart;
+    parse() {
+        let currentArg, parsedArgs = _.transform(this.argv, (preparedArgs, argPart) => {
+            let currentArgValue;
+            if (_(argPart).startsWith(ARGUMENTS_PREFIX)) {
+                currentArg = argPart.substr(_.size(ARGUMENTS_PREFIX));
+                if (!_.includes(TSDOC_ALL_ARGS, currentArg)) {
+                    throw `Unexpected argument \"${argPart}\". Run \"tsdoc --help\" for help`;
                 }
-                currentArg = argPart;
             }
-            else if (!_.isEmpty(preparedArgs)) {
+            else if (preparedArgs) {
                 currentArgValue = _.get(preparedArgs, currentArg) || argPart;
                 if (_.isArray(currentArgValue)) {
                     currentArgValue.push(argPart);
                 }
-                else {
+                else if (_.size(currentArgValue)) {
                     currentArgValue = [currentArgValue];
                 }
             }
@@ -34,9 +30,12 @@ var ArgumentsParser = (function () {
                 _.set(preparedArgs, currentArg, currentArgValue);
             }
             return preparedArgs;
-        }, {})
-            .value();
-    };
-    return ArgumentsParser;
-}());
-exports.ArgumentsParser = ArgumentsParser;
+        }, {});
+        if (_.isEmpty(parsedArgs)) {
+            throw `No parameters were passed. Run \"tsdoc --help\" for help`;
+        }
+        return parsedArgs;
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ArgumentsParser;

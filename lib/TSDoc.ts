@@ -1,8 +1,10 @@
 /// <reference types="node" />
-import {ArgumentsParser} from "./modules/ArgumentsParser";
+import ArgumentsParser from "./modules/ArgumentsParser";
 
 export interface TSDocArguments {
-
+    out?: string[],
+    version?: undefined,
+    help?: undefined
 }
 
 interface TSDocInterface {
@@ -14,7 +16,11 @@ class TSDoc implements TSDocInterface {
     public arguments:TSDocArguments = {};
 
     constructor(){
-        this.arguments = new ArgumentsParser(process.argv).parse();
+        try {
+            this.arguments = new ArgumentsParser(process.argv).parse();
+        } catch (e){
+            console.error(e);
+        }
     }
 }
 

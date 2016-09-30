@@ -1,10 +1,14 @@
 "use strict";
-var ArgumentsParser_1 = require("./modules/ArgumentsParser");
-var TSDoc = (function () {
-    function TSDoc() {
+const ArgumentsParser_1 = require("./modules/ArgumentsParser");
+class TSDoc {
+    constructor() {
         this.arguments = {};
-        this.arguments = new ArgumentsParser_1.ArgumentsParser(process.argv).parse();
+        try {
+            this.arguments = new ArgumentsParser_1.default(process.argv).parse();
+        }
+        catch (e) {
+            console.error(e);
+        }
     }
-    return TSDoc;
-}());
+}
 new TSDoc();
