@@ -2,7 +2,7 @@
   "name": "tsdoc",
   "version": "0.0.1",
   "description": "A documentation generator for TypeScript code",
-  "main": "src/tsdoc.js",
+  "main": "src/TSDoc.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/my2b/TSDoc.git"

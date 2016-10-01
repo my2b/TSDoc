@@ -1,25 +1,30 @@
 /// <reference types="lodash" />
 import * as _ from "lodash"
-import {TSDocArguments} from "../TSDoc";
 
-const TSDOC_SINGLE_ARGS:string[] = ['help', 'version'];
-const TSDOC_CHAIN_ARGS:string[] = ['out',];
-const TSDOC_ALL_ARGS:string[] = _.concat(TSDOC_CHAIN_ARGS, TSDOC_SINGLE_ARGS);
-const ARGUMENTS_PREFIX:string = '--';
+const TSDOC_SINGLE_ARGS: string[] = ['help', 'version'];
+const TSDOC_CHAIN_ARGS: string[] = ['out',];
+const TSDOC_ALL_ARGS: string[] = _.concat(TSDOC_CHAIN_ARGS, TSDOC_SINGLE_ARGS);
+const ARGUMENTS_PREFIX: string = '--';
 
-interface ArgumentsParserInterface {
-    parse():any;
+export interface TSDocArguments {
+    out?: string[],
+    version?: undefined,
+    help?: undefined
 }
 
-export default class ArgumentsParser implements ArgumentsParserInterface {
+interface ArgumentsParserInterface {
+    parse(): any;
+}
 
-    public parse():TSDocArguments {
-        let currentArg:string,
-            parsedArgs:TSDocArguments =
-                _.transform(this.argv, (preparedArgs:TSDocArguments, argPart:string) => {
-                    let currentArgValue:string|string[];
+export class ArgumentsParser implements ArgumentsParserInterface {
 
-                    if(_(argPart).startsWith(ARGUMENTS_PREFIX)){
+    public parse(): TSDocArguments {
+        let currentArg: string,
+            parsedArgs: TSDocArguments =
+                _.transform(this.argv, (preparedArgs: TSDocArguments, argPart: string) => {
+                    let currentArgValue: string|string[];
+
+                    if(_.startsWith(argPart, ARGUMENTS_PREFIX)){
                         currentArg = argPart.substr(_.size(ARGUMENTS_PREFIX));
 
                         if(!_.includes(TSDOC_ALL_ARGS, currentArg)){
@@ -31,7 +36,7 @@ export default class ArgumentsParser implements ArgumentsParserInterface {
 
                         if(_.isArray(currentArgValue)){
                             currentArgValue.push(argPart);
-                        } else if (_.size(currentArgValue)) {
+                        } else if (currentArgValue) {
                             currentArgValue = [currentArgValue];
                         }
                     }

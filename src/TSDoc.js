@@ -1,14 +1,12 @@
 "use strict";
-const ArgumentsParser_1 = require("./modules/ArgumentsParser");
+const Generator_1 = require("./modules/Generator");
 class TSDoc {
     constructor() {
-        this.arguments = {};
-        try {
-            this.arguments = new ArgumentsParser_1.default(process.argv).parse();
-        }
-        catch (e) {
-            console.error(e);
-        }
+        new Generator_1.Generator()
+            .setArguments(process.argv)
+            .chooseAction()
+            .callAction()
+            .returnResult();
     }
 }
 new TSDoc();

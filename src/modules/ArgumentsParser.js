@@ -11,7 +11,7 @@ class ArgumentsParser {
     parse() {
         let currentArg, parsedArgs = _.transform(this.argv, (preparedArgs, argPart) => {
             let currentArgValue;
-            if (_(argPart).startsWith(ARGUMENTS_PREFIX)) {
+            if (_.startsWith(argPart, ARGUMENTS_PREFIX)) {
                 currentArg = argPart.substr(_.size(ARGUMENTS_PREFIX));
                 if (!_.includes(TSDOC_ALL_ARGS, currentArg)) {
                     throw `Unexpected argument \"${argPart}\". Run \"tsdoc --help\" for help`;
@@ -22,7 +22,7 @@ class ArgumentsParser {
                 if (_.isArray(currentArgValue)) {
                     currentArgValue.push(argPart);
                 }
-                else if (_.size(currentArgValue)) {
+                else if (currentArgValue) {
                     currentArgValue = [currentArgValue];
                 }
             }
@@ -37,5 +37,4 @@ class ArgumentsParser {
         return parsedArgs;
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = ArgumentsParser;
+exports.ArgumentsParser = ArgumentsParser;

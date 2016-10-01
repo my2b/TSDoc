@@ -1,26 +1,14 @@
 /// <reference types="node" />
-import ArgumentsParser from "./modules/ArgumentsParser";
+import {Generator} from "./modules/Generator";
 
-export interface TSDocArguments {
-    out?: string[],
-    version?: undefined,
-    help?: undefined
-}
-
-interface TSDocInterface {
-    arguments: TSDocArguments;
-}
-
-class TSDoc implements TSDocInterface {
-
-    public arguments:TSDocArguments = {};
+class TSDoc {
 
     constructor(){
-        try {
-            this.arguments = new ArgumentsParser(process.argv).parse();
-        } catch (e){
-            console.error(e);
-        }
+        new Generator()
+            .setArguments(process.argv)
+            .chooseAction()
+            .callAction()
+            .returnResult();
     }
 }
 
