@@ -1,7 +1,7 @@
 /// <reference types="lodash" />
 import * as _ from "lodash"
 
-const TSDOC_SINGLE_ARGS: string[] = ['help', 'version'];
+export const TSDOC_SINGLE_ARGS: string[] = ['help', 'version'];
 const TSDOC_CHAIN_ARGS: string[] = ['out',];
 const TSDOC_ALL_ARGS: string[] = _.concat(TSDOC_CHAIN_ARGS, TSDOC_SINGLE_ARGS);
 const ARGUMENTS_PREFIX: string = '--';

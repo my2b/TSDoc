@@ -1,8 +1,8 @@
 "use strict";
 const _ = require("lodash");
-const TSDOC_SINGLE_ARGS = ['help', 'version'];
+exports.TSDOC_SINGLE_ARGS = ['help', 'version'];
 const TSDOC_CHAIN_ARGS = ['out',];
-const TSDOC_ALL_ARGS = _.concat(TSDOC_CHAIN_ARGS, TSDOC_SINGLE_ARGS);
+const TSDOC_ALL_ARGS = _.concat(TSDOC_CHAIN_ARGS, exports.TSDOC_SINGLE_ARGS);
 const ARGUMENTS_PREFIX = '--';
 class ArgumentsParser {
     constructor(argv) {
