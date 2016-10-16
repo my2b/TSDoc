@@ -13,9 +13,10 @@
   },
   "homepage": "https://github.com/my2b/TSDoc#readme",
   "dependencies": [
-    "typescript@^2.0",
-    "lodash@^4.14.36",
-    "@types/lodash@^4.14.36",
-    "@types/node@^6.0.41"
+    "lodash@4.16.4",
+    "argv@0.0.2",
+    "@types/argv@0.0.4",
+    "@types/lodash@4.16.4",
+    "@types/node@6.0.41"
   ]
 }
